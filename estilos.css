@@ -1,18 +1,4 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Política de cookies | Reparaciones.net</title>
-<meta name="description" content="Política de cookies">
-<link rel="canonical" href="https://www.reparaciones.net/cookies/">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Política de cookies | Reparaciones.net">
-<meta property="og:description" content="Política de cookies">
-<meta property="og:url" content="https://www.reparaciones.net/cookies/">
-<meta property="og:locale" content="es_ES">
-<style>/* Estilos de reparaciones.net.
+/* Estilos de reparaciones.net.
 
    LA PALETA sale del oficio, no de una plantilla: el azul de un plano de
    instalacion y el naranja de la senal de obra. Los neutros tiran a arena y no
@@ -139,64 +125,3 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--naranja);outline-of
   *{transition:none !important}
   .rejilla a:hover{transform:none}
 }
-</style>
-
-</head>
-<body>
-<header class="top"><div class="env">
-  <a class="marca" href="/">Reparaciones<span>.net</span></a>
-  <nav class="top-nav" aria-label="Principal">
-    <a href="/#servicios">Servicios</a>
-    <a href="/#urgencias">Urgencias</a>
-    <a href="/contacto/">Contacto</a>
-  </nav>
-</div></header>
-<div class="env"><div class="legal"><h1>Política de cookies</h1>
-<p><strong>Esta web no utiliza cookies de seguimiento, de analítica ni de
-publicidad.</strong> No hay Google Analytics, ni píxeles, ni servicios de
-terceros que rastreen su navegación.</p>
-
-<h2>Lo único que se guarda</h2>
-<p>Al aceptar el aviso que aparece la primera vez, se guarda en su propio
-navegador una marca (<code>galletas-vistas</code>) para no volver a mostrarlo.
-Esa marca no sale de su dispositivo, no identifica a nadie, y puede borrarla
-vaciando los datos del sitio desde su navegador.</p>
-<p>Técnicamente no es una cookie sino almacenamiento local y, por su finalidad,
-está exenta de consentimiento. Se informa igualmente por transparencia.</p>
-
-<h2>Si esto cambia</h2>
-<p>Si en el futuro se incorpora analítica, publicidad o cualquier otro servicio
-de terceros, esta página se actualizará y el aviso dejará de ser informativo
-para pasar a <strong>pedir consentimiento antes de cargar nada</strong>.</p>
-</div></div><footer class="pie"><div class="env">
-  <nav aria-label="Legal">
-    <a href="/aviso-legal/">Aviso legal</a>
-    <a href="/privacidad/">Protección de datos</a>
-    <a href="/cookies/">Política de cookies</a>
-    <a href="/contacto/">Contacto</a>
-  </nav>
-  <p>Reparaciones.net &middot; Comunidad de Madrid</p>
-  <p class="vacio">Los datos de la empresa están pendientes de rellenar.</p>
-</div></footer>
-<div id="galletas" role="dialog" aria-label="Aviso de cookies">
-  <p>Esta web no usa cookies de seguimiento ni de publicidad. Solo guarda, en tu
-     propio navegador, que ya has visto este aviso.</p>
-  <button type="button" id="okGalletas">Entendido</button>
-</div>
-<script>
-/* El aviso se ensena UNA vez y se recuerda en el navegador del visitante. No
-   hay analitica ni cookies de terceros: si algun dia se anaden, este aviso
-   tiene que pedir CONSENTIMIENTO de verdad, no solo informar. */
-(function(){
-  var c=document.getElementById('galletas'), b=document.getElementById('okGalletas');
-  var visto=false;
-  try{ visto = localStorage.getItem('galletas-vistas')==='1'; }catch(e){}
-  if(!visto){ c.style.display='flex'; }
-  b.addEventListener('click',function(){
-    c.style.display='none';
-    try{ localStorage.setItem('galletas-vistas','1'); }catch(e){}
-  });
-})();
-</script>
-</body>
-</html>

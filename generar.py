@@ -84,88 +84,7 @@ def esc(t):
     return (t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
-ESTILOS = """
-:root{
-  --fondo:#f6f6f4; --sup:#fff; --sup2:#eceae5;
-  --tinta:#1c1a17; --suave:#5b5650; --tenue:#847e76;
-  --linea:#dedbd4; --azul:#14508c; --azul-cl:#e6eef7;
-  --naranja:#b4531a;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --fondo:#16150f; --sup:#1e1d17; --sup2:#27251d;
-  --tinta:#eceae4; --suave:#a9a39a; --tenue:#867f75;
-  --linea:#332f26; --azul:#6fa8e0; --azul-cl:#17242f; --naranja:#e08c4d;
-}}
-:root[data-theme="dark"]{
-  --fondo:#16150f; --sup:#1e1d17; --sup2:#27251d;
-  --tinta:#eceae4; --suave:#a9a39a; --tenue:#867f75;
-  --linea:#332f26; --azul:#6fa8e0; --azul-cl:#17242f; --naranja:#e08c4d;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--fondo);color:var(--tinta);
-  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.env{max-width:1080px;margin:0 auto;padding:0 20px}
-a{color:var(--azul)}
-header.top{background:var(--sup);border-bottom:1px solid var(--linea);
-  position:sticky;top:0;z-index:20}
-.top .env{display:flex;align-items:center;justify-content:space-between;
-  gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
-.marca{font-weight:700;font-size:19px;letter-spacing:-.02em;text-decoration:none;color:var(--tinta)}
-.marca span{color:var(--naranja)}
-nav.top-nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14.5px}
-nav.top-nav a{text-decoration:none;color:var(--suave)}
-nav.top-nav a:hover{color:var(--azul)}
-.hero{background:var(--sup);border-bottom:1px solid var(--linea);padding:52px 0 42px}
-.hero h1{font-size:clamp(28px,4.6vw,42px);line-height:1.12;margin:0 0 14px;
-  letter-spacing:-.02em;text-wrap:balance;max-width:17ch}
-.hero p{font-size:17.5px;color:var(--suave);max-width:60ch;margin:0 0 22px}
-.pendiente{display:inline-block;background:var(--azul-cl);color:var(--azul);
-  border:1px dashed var(--azul);border-radius:6px;padding:9px 14px;font-size:14px}
-.indice{padding:34px 0 8px}
-.indice h2{font-size:14px;text-transform:uppercase;letter-spacing:.09em;
-  color:var(--tenue);margin:0 0 14px;font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
-.chips a{display:block;background:var(--sup);border:1px solid var(--linea);
-  border-radius:99px;padding:7px 14px;text-decoration:none;color:var(--tinta);
-  font-size:14.5px}
-.chips a:hover{border-color:var(--azul);color:var(--azul)}
-section.serv{padding:30px 0 6px;scroll-margin-top:72px}
-section.serv h2{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
-section.serv .cuantos{color:var(--tenue);font-size:13.5px;margin:0 0 14px}
-ul.lista{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;
-  background:var(--linea);border:1px solid var(--linea);border-radius:8px;overflow:hidden}
-ul.lista li{background:var(--sup);padding:10px 14px;font-size:14.8px}
-footer.pie{margin-top:54px;background:var(--sup);border-top:1px solid var(--linea);
-  padding:30px 0 40px;color:var(--suave);font-size:14.5px}
-footer.pie nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.vacio{border:1px dashed var(--linea);border-radius:8px;padding:18px;
-  color:var(--tenue);background:var(--sup2);margin:14px 0}
-#galletas{position:fixed;left:16px;right:16px;bottom:16px;background:var(--sup);
-  border:1px solid var(--linea);border-radius:10px;padding:15px 17px;
-  box-shadow:0 6px 24px rgba(0,0,0,.14);display:none;gap:14px;
-  align-items:center;justify-content:space-between;flex-wrap:wrap;z-index:50;
-  max-width:760px;margin:0 auto}
-#galletas p{margin:0;font-size:14.5px;max-width:62ch}
-#galletas button{background:var(--azul);color:#fff;border:0;border-radius:6px;
-  padding:9px 18px;font-size:14.5px;cursor:pointer}
-.logo-hero{display:block;margin:0 0 18px;height:auto;max-width:230px}
-.aclara{font-size:15px;color:var(--tenue);border-left:3px solid var(--naranja);
-  padding-left:13px;max-width:58ch}
-.serv-cab{display:flex;gap:16px;align-items:center;margin:0 0 14px}
-.serv-cab img{border-radius:8px;border:1px solid var(--linea);flex:0 0 auto;
-  width:72px;height:80px;object-fit:cover;background:var(--sup2)}
-.serv-cab h2{margin:0}
-.serv-cab .cuantos{margin:2px 0 0}
-.legal{max-width:72ch;padding:34px 0 10px}
-.legal h1{font-size:clamp(25px,4vw,34px);letter-spacing:-.02em;margin:0 0 20px}
-.legal h2{font-size:19px;margin:30px 0 8px;letter-spacing:-.01em}
-.legal p,.legal li{color:var(--suave)}
-.legal code{background:var(--sup2);padding:1px 5px;border-radius:3px;font-size:.9em}
-.legal .nota{font-size:14px;color:var(--tenue);border-left:2px solid var(--linea);padding-left:12px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-"""
+ESTILOS = io.open(os.path.join(AQUI, chr(101)+chr(115)+chr(116)+chr(105)+chr(108)+chr(111)+chr(115)+chr(46)+chr(99)+chr(115)+chr(115)), encoding=chr(117)+chr(116)+chr(102)+chr(45)+chr(56)).read()
 
 
 def cabeza(titulo, descripcion, ruta, extra_ld=""):
@@ -281,9 +200,11 @@ def portada(datos):
 """ % (total, len(secs)))
 
     h.append('<div class="env"><div class="indice" id="servicios">'
-             '<h2>Todas las especialidades</h2><ul class="chips">')
-    for a, t, _ in secs:
-        h.append('<li><a href="#%s">%s</a></li>' % (a, esc(t)))
+             '<h2>Todas las especialidades</h2><ul class="rejilla">')
+    for n0, (a, t, i0) in enumerate(secs):
+        ilus = ILUSTRACIONES[n0] if n0 < len(ILUSTRACIONES) else None
+        h.append('<li><a href="#%s">%s<span><b>%s</b><em>%d servicios</em></span></a></li>'
+                 % (a, ('<img src="/img/%s" alt="" width="180" height="200" loading="lazy">' % ilus) if ilus else '', esc(t), len(datos[i0])))
     h.append("</ul></div>")
 
     for n, (a, t, i) in enumerate(secs):

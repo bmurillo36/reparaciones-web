@@ -12,87 +12,133 @@
 <meta property="og:description" content="Ponemos en contacto a particulares de la Comunidad de Madrid con profesionales de fontaneria, electricidad, cerrajeria, electrodomesticos, persianas, tejados, pintura, carpinteria, cristaleria y reformas.">
 <meta property="og:url" content="https://www.reparaciones.net/">
 <meta property="og:locale" content="es_ES">
-<style>
+<style>/* Estilos de reparaciones.net.
+
+   LA PALETA sale del oficio, no de una plantilla: el azul de un plano de
+   instalacion y el naranja de la senal de obra. Los neutros tiran a arena y no
+   a gris de oficina, porque esto va de casas.
+
+   LOS EFECTOS AL PASAR EL RATON son tres, y cada uno dice algo:
+     - las fichas del indice se LEVANTAN -> se puede pinchar, lleva a otro sitio
+     - cada servicio se ilumina y se DESPLAZA un poco -> estas sobre esa linea
+     - los enlaces del menu y los botones cambian de fondo -> son controles
+   Los tres se apagan con prefers-reduced-motion. */
+
 :root{
-  --fondo:#f6f6f4; --sup:#fff; --sup2:#eceae5;
-  --tinta:#1c1a17; --suave:#5b5650; --tenue:#847e76;
-  --linea:#dedbd4; --azul:#14508c; --azul-cl:#e6eef7;
-  --naranja:#b4531a;
+  --fondo:#f5f4f1; --sup:#fff; --sup2:#edeae4; --sup3:#e3ded5;
+  --tinta:#191712; --suave:#57524a; --tenue:#8a837a;
+  --linea:#ddd8ce; --linea2:#c7c0b3;
+  --azul:#0f4c81; --azul-cl:#e7eff7; --naranja:#c2570f; --naranja-cl:#fbeee2;
+  --sombra:0 1px 2px rgba(25,23,18,.05);
+  --sombra-alta:0 10px 26px -8px rgba(15,76,129,.28);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --fondo:#16150f; --sup:#1e1d17; --sup2:#27251d;
-  --tinta:#eceae4; --suave:#a9a39a; --tenue:#867f75;
-  --linea:#332f26; --azul:#6fa8e0; --azul-cl:#17242f; --naranja:#e08c4d;
+  --fondo:#14120e; --sup:#1c1a15; --sup2:#252219; --sup3:#2f2b20;
+  --tinta:#efece5; --suave:#aaa39a; --tenue:#867f74;
+  --linea:#312c22; --linea2:#433d30;
+  --azul:#74aee4; --azul-cl:#16232f; --naranja:#e8934f; --naranja-cl:#2d2216;
+  --sombra:0 1px 2px rgba(0,0,0,.4); --sombra-alta:0 10px 26px -8px rgba(0,0,0,.6);
 }}
 :root[data-theme="dark"]{
-  --fondo:#16150f; --sup:#1e1d17; --sup2:#27251d;
-  --tinta:#eceae4; --suave:#a9a39a; --tenue:#867f75;
-  --linea:#332f26; --azul:#6fa8e0; --azul-cl:#17242f; --naranja:#e08c4d;
+  --fondo:#14120e; --sup:#1c1a15; --sup2:#252219; --sup3:#2f2b20;
+  --tinta:#efece5; --suave:#aaa39a; --tenue:#867f74;
+  --linea:#312c22; --linea2:#433d30;
+  --azul:#74aee4; --azul-cl:#16232f; --naranja:#e8934f; --naranja-cl:#2d2216;
+  --sombra:0 1px 2px rgba(0,0,0,.4); --sombra-alta:0 10px 26px -8px rgba(0,0,0,.6);
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--fondo);color:var(--tinta);
   font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.env{max-width:1080px;margin:0 auto;padding:0 20px}
+.env{max-width:1120px;margin:0 auto;padding:0 22px}
 a{color:var(--azul)}
+
 header.top{background:var(--sup);border-bottom:1px solid var(--linea);
-  position:sticky;top:0;z-index:20}
+  position:sticky;top:0;z-index:20;box-shadow:var(--sombra)}
 .top .env{display:flex;align-items:center;justify-content:space-between;
-  gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
-.marca{font-weight:700;font-size:19px;letter-spacing:-.02em;text-decoration:none;color:var(--tinta)}
+  gap:16px;padding:11px 22px;flex-wrap:wrap}
+.marca{font-weight:700;font-size:19px;letter-spacing:-.025em;
+  text-decoration:none;color:var(--tinta)}
 .marca span{color:var(--naranja)}
-nav.top-nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14.5px}
-nav.top-nav a{text-decoration:none;color:var(--suave)}
-nav.top-nav a:hover{color:var(--azul)}
-.hero{background:var(--sup);border-bottom:1px solid var(--linea);padding:52px 0 42px}
-.hero h1{font-size:clamp(28px,4.6vw,42px);line-height:1.12;margin:0 0 14px;
-  letter-spacing:-.02em;text-wrap:balance;max-width:17ch}
-.hero p{font-size:17.5px;color:var(--suave);max-width:60ch;margin:0 0 22px}
+nav.top-nav{display:flex;gap:6px;flex-wrap:wrap;font-size:14.5px}
+nav.top-nav a{text-decoration:none;color:var(--suave);padding:6px 12px;
+  border-radius:99px;transition:background .16s,color .16s}
+nav.top-nav a:hover{background:var(--azul-cl);color:var(--azul)}
+
+.hero{background:linear-gradient(180deg,var(--sup) 0%,var(--fondo) 100%);
+  border-bottom:1px solid var(--linea);padding:56px 0 46px}
+.logo-hero{display:block;margin:0 0 20px;height:auto;max-width:210px}
+.hero h1{font-size:clamp(29px,4.8vw,44px);line-height:1.1;margin:0 0 14px;
+  letter-spacing:-.028em;text-wrap:balance;max-width:19ch}
+.hero p{font-size:18px;color:var(--suave);max-width:58ch;margin:0 0 20px}
+.aclara{font-size:15px;color:var(--suave);border-left:3px solid var(--naranja);
+  padding:2px 0 2px 14px;max-width:60ch;margin:0 0 22px}
 .pendiente{display:inline-block;background:var(--azul-cl);color:var(--azul);
-  border:1px dashed var(--azul);border-radius:6px;padding:9px 14px;font-size:14px}
-.indice{padding:34px 0 8px}
-.indice h2{font-size:14px;text-transform:uppercase;letter-spacing:.09em;
-  color:var(--tenue);margin:0 0 14px;font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
-.chips a{display:block;background:var(--sup);border:1px solid var(--linea);
-  border-radius:99px;padding:7px 14px;text-decoration:none;color:var(--tinta);
-  font-size:14.5px}
-.chips a:hover{border-color:var(--azul);color:var(--azul)}
-section.serv{padding:30px 0 6px;scroll-margin-top:72px}
-section.serv h2{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
-section.serv .cuantos{color:var(--tenue);font-size:13.5px;margin:0 0 14px}
-ul.lista{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;
-  background:var(--linea);border:1px solid var(--linea);border-radius:8px;overflow:hidden}
-ul.lista li{background:var(--sup);padding:10px 14px;font-size:14.8px}
-footer.pie{margin-top:54px;background:var(--sup);border-top:1px solid var(--linea);
-  padding:30px 0 40px;color:var(--suave);font-size:14.5px}
-footer.pie nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px}
-.vacio{border:1px dashed var(--linea);border-radius:8px;padding:18px;
-  color:var(--tenue);background:var(--sup2);margin:14px 0}
-#galletas{position:fixed;left:16px;right:16px;bottom:16px;background:var(--sup);
-  border:1px solid var(--linea);border-radius:10px;padding:15px 17px;
-  box-shadow:0 6px 24px rgba(0,0,0,.14);display:none;gap:14px;
-  align-items:center;justify-content:space-between;flex-wrap:wrap;z-index:50;
-  max-width:760px;margin:0 auto}
-#galletas p{margin:0;font-size:14.5px;max-width:62ch}
-#galletas button{background:var(--azul);color:#fff;border:0;border-radius:6px;
-  padding:9px 18px;font-size:14.5px;cursor:pointer}
-.logo-hero{display:block;margin:0 0 18px;height:auto;max-width:230px}
-.aclara{font-size:15px;color:var(--tenue);border-left:3px solid var(--naranja);
-  padding-left:13px;max-width:58ch}
-.serv-cab{display:flex;gap:16px;align-items:center;margin:0 0 14px}
-.serv-cab img{border-radius:8px;border:1px solid var(--linea);flex:0 0 auto;
-  width:72px;height:80px;object-fit:cover;background:var(--sup2)}
-.serv-cab h2{margin:0}
-.serv-cab .cuantos{margin:2px 0 0}
-.legal{max-width:72ch;padding:34px 0 10px}
-.legal h1{font-size:clamp(25px,4vw,34px);letter-spacing:-.02em;margin:0 0 20px}
-.legal h2{font-size:19px;margin:30px 0 8px;letter-spacing:-.01em}
+  border:1px dashed var(--azul);border-radius:7px;padding:9px 15px;font-size:14px}
+
+.indice{padding:44px 0 6px}
+.indice h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--tenue);margin:0 0 16px;font-weight:600}
+.rejilla{display:grid;gap:12px;padding:0;margin:0;list-style:none;
+  grid-template-columns:repeat(auto-fill,minmax(215px,1fr))}
+.rejilla a{display:flex;align-items:center;gap:12px;background:var(--sup);
+  border:1px solid var(--linea);border-radius:10px;padding:12px 14px;
+  text-decoration:none;color:var(--tinta);box-shadow:var(--sombra);height:100%;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s}
+.rejilla a:hover{transform:translateY(-3px);box-shadow:var(--sombra-alta);
+  border-color:var(--azul)}
+.rejilla img{width:44px;height:49px;object-fit:cover;border-radius:7px;
+  background:var(--sup2);flex:0 0 auto}
+.rejilla b{display:block;font-size:15px;font-weight:600;letter-spacing:-.012em}
+.rejilla em{display:block;font-style:normal;font-size:12.5px;color:var(--tenue)}
+
+section.serv{scroll-margin-top:74px;margin:22px 0 0;background:var(--sup);
+  border:1px solid var(--linea);border-radius:12px;overflow:hidden;
+  box-shadow:var(--sombra)}
+.serv-cab{display:flex;gap:16px;align-items:center;padding:16px 20px;
+  background:var(--sup2);border-bottom:1px solid var(--linea)}
+.serv-cab img{width:58px;height:64px;object-fit:cover;border-radius:8px;
+  border:1px solid var(--linea2);background:var(--sup);flex:0 0 auto}
+.serv-cab h2{margin:0;font-size:21px;letter-spacing:-.02em}
+.serv-cab .cuantos{margin:2px 0 0;color:var(--tenue);font-size:13px}
+ul.lista{list-style:none;margin:0;padding:14px 16px 18px;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:2px}
+ul.lista li{padding:8px 12px;font-size:14.7px;border-radius:7px;
+  color:var(--suave);transition:background .13s,color .13s,padding-left .13s}
+ul.lista li:hover{background:var(--naranja-cl);color:var(--tinta);padding-left:18px}
+
+footer.pie{margin-top:56px;background:var(--sup);border-top:1px solid var(--linea);
+  padding:32px 0 44px;color:var(--suave);font-size:14.5px}
+footer.pie nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+footer.pie nav a{padding:5px 11px;border-radius:99px;text-decoration:none;
+  transition:background .16s}
+footer.pie nav a:hover{background:var(--azul-cl)}
+.vacio{border:1px dashed var(--linea2);border-radius:9px;padding:18px;
+  color:var(--tenue);background:var(--sup2);margin:16px 0}
+
+.legal{max-width:70ch;padding:38px 0 12px}
+.legal h1{font-size:clamp(26px,4vw,35px);letter-spacing:-.028em;margin:0 0 22px}
+.legal h2{font-size:19px;margin:32px 0 9px;letter-spacing:-.015em}
 .legal p,.legal li{color:var(--suave)}
-.legal code{background:var(--sup2);padding:1px 5px;border-radius:3px;font-size:.9em}
-.legal .nota{font-size:14px;color:var(--tenue);border-left:2px solid var(--linea);padding-left:12px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.legal code{background:var(--sup2);padding:1px 6px;border-radius:4px;font-size:.9em}
+
+#galletas{position:fixed;left:16px;right:16px;bottom:16px;background:var(--sup);
+  border:1px solid var(--linea2);border-radius:12px;padding:16px 18px;
+  box-shadow:var(--sombra-alta);display:none;gap:14px;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;z-index:50;max-width:740px;margin:0 auto}
+#galletas p{margin:0;font-size:14.5px;max-width:60ch}
+#galletas button{background:var(--azul);color:#fff;border:0;border-radius:7px;
+  padding:10px 20px;font-size:14.5px;cursor:pointer;transition:filter .16s}
+#galletas button:hover{filter:brightness(1.15)}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+  .rejilla a:hover{transform:none}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://www.reparaciones.net/#empresa","name":"Reparaciones.net","url":"https://www.reparaciones.net","description":"Ponemos en contacto a particulares de la Comunidad de Madrid con profesionales de fontaneria, electricidad, cerrajeria, electrodomesticos, persianas, tejados, pintura, carpinteria, cristaleria y reformas.","telephone":"","email":"","address":{"@type":"PostalAddress","addressRegion":"Comunidad de Madrid","addressCountry":"ES","streetAddress":"","postalCode":"","addressLocality":""},"areaServed":{"@type":"AdministrativeArea","name":"Comunidad de Madrid"},"makesOffer":[{"@type":"Service","name":"Fontanería"},{"@type":"Service","name":"Televisión, vídeo y proyectores"},{"@type":"Service","name":"Tejados y canalones"},{"@type":"Service","name":"Antenas y TDT"},{"@type":"Service","name":"Audio, vídeo y porteros"},{"@type":"Service","name":"Electricidad"},{"@type":"Service","name":"Cerrajería"},{"@type":"Service","name":"Pérgolas y toldos"},{"@type":"Service","name":"Pintura"},{"@type":"Service","name":"Carpintería y puertas"},{"@type":"Service","name":"Cristalería"},{"@type":"Service","name":"Reformas"},{"@type":"Service","name":"Reformas integrales"},{"@type":"Service","name":"Electrodomésticos"},{"@type":"Service","name":"Aire acondicionado"},{"@type":"Service","name":"Persianas y mosquiteras"}]},{"@type":"WebSite","@id":"https://www.reparaciones.net/#web","url":"https://www.reparaciones.net","name":"Reparaciones.net","inLanguage":"es-ES","publisher":{"@id":"https://www.reparaciones.net/#empresa"}}]}</script>
 </head>
@@ -116,7 +162,7 @@ footer.pie nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px}
      directamente con el profesional.</p>
   <p class="pendiente">Los datos de contacto están pendientes de rellenar.</p>
 </div></div>
-<div class="env"><div class="indice" id="servicios"><h2>Todas las especialidades</h2><ul class="chips"><li><a href="#fontaneria">Fontanería</a></li><li><a href="#television">Televisión, vídeo y proyectores</a></li><li><a href="#tejados">Tejados y canalones</a></li><li><a href="#antenas">Antenas y TDT</a></li><li><a href="#audio">Audio, vídeo y porteros</a></li><li><a href="#electricidad">Electricidad</a></li><li><a href="#cerrajeria">Cerrajería</a></li><li><a href="#pergolas">Pérgolas y toldos</a></li><li><a href="#pintura">Pintura</a></li><li><a href="#carpinteria">Carpintería y puertas</a></li><li><a href="#cristaleria">Cristalería</a></li><li><a href="#reformas">Reformas</a></li><li><a href="#reformas-obra">Reformas integrales</a></li><li><a href="#electrodomesticos">Electrodomésticos</a></li><li><a href="#aire">Aire acondicionado</a></li><li><a href="#persianas">Persianas y mosquiteras</a></li></ul></div><section class="serv" id="fontaneria"><div class="serv-cab"><img src="/img/cache_7650510.png" alt="" width="180" height="200" loading="lazy"><div><h2>Fontanería</h2><p class="cuantos">21 servicios</p></div></div><ul class="lista"><li>Reparaciones Fontaneria Fontaneros Urgentes</li><li>Rotura de Tuberias</li><li>Fuga de Agua</li><li>Desatascar Tuberias</li><li>Reparar Cisterna</li><li>Cambiar un Grifo</li><li>Cambiar Plato de Ducha</li><li>Eliminar Humedades</li><li>Eliminar Filtraciones</li><li>Desatascar Fregadero</li><li>Instalar Fregadero</li><li>Cambiar Valvula</li><li>Cambiar Llave de Paso</li><li>Sustituir o cambiar Sifones</li><li>Reparar Manpara de Baño</li><li>Sellar Cuarto de Baño</li><li>Problemas de Fontaneria</li><li>Desatrancar Tuberia</li><li>Tuberias Rotas</li><li>Tuberias con Fugas</li><li>Instalacion de Electrodomesticos</li></ul></section><section class="serv" id="television"><div class="serv-cab"><img src="/img/cache_7650514.png" alt="" width="180" height="200" loading="lazy"><div><h2>Televisión, vídeo y proyectores</h2><p class="cuantos">40 servicios</p></div></div><ul class="lista"><li>Reparacion de Television de Plasma</li><li>Reparacion de Television LCD</li><li>Reparacion Television OLED</li><li>Reparacion Television de Tubo</li><li>Reparacion Proyector</li><li>Airis</li><li>Aiwa</li><li>Akai</li><li>Bang &amp; Olufsen</li><li>Belson</li><li>Benq</li><li>Blaupunkt</li><li>Daewoo</li><li>Denon</li><li>Fujitsu</li><li>Goldstar</li><li>Grundig</li><li>Harman Kardon</li><li>Hisense</li><li>Hitachi</li><li>Infocus</li><li>JVC</li><li>Kenwood</li><li>LG</li><li>Loewe</li><li>Pioneer</li><li>Marantz</li><li>Nec</li><li>Saba</li><li>Saivod</li><li>Samsung</li><li>Sanyo</li><li>Sharp</li><li>Siemens</li><li>SONY</li><li>Technics</li><li>Telefunken</li><li>Thomson</li><li>Toshiba</li><li>Vieta</li></ul></section><section class="serv" id="tejados"><div class="serv-cab"><img src="/img/cache_7650518.png" alt="" width="180" height="200" loading="lazy"><div><h2>Tejados y canalones</h2><p class="cuantos">10 servicios</p></div></div><ul class="lista"><li>Rehabilitacion de Tejados</li><li>Inspeccion de Tejados</li><li>Reparacion de daños en el Tejado</li><li>Reparacion de Goteras</li><li>Filtraciones en Tejados</li><li>Sustituir Canalones</li><li>Montaje Canalones</li><li>Mantenimiento de Tejados</li><li>Montaje Sistemas Termicos</li><li>Tejados Antiguos</li></ul></section><section class="serv" id="antenas"><div class="serv-cab"><img src="/img/cache_7650521.png" alt="" width="180" height="200" loading="lazy"><div><h2>Antenas y TDT</h2><p class="cuantos">8 servicios</p></div></div><ul class="lista"><li>Antenas de TV</li><li>Sintonizacion de Canales</li><li>Reordenacion de Canales</li><li>Calidad de la Señal</li><li>TDT</li><li>Parabolicas</li><li>Antenas de TV en comunidades</li><li>Receptores TDT</li></ul></section><section class="serv" id="audio"><div class="serv-cab"><img src="/img/cache_7650526.png" alt="" width="180" height="200" loading="lazy"><div><h2>Audio, vídeo y porteros</h2><p class="cuantos">8 servicios</p></div></div><ul class="lista"><li>Aparatos de Audio</li><li>Aparatos de Video</li><li>Equipos de Musica</li><li>Home Cinema</li><li>Videojuegos</li><li>Camara de Fotos</li><li>Camara de Video</li><li>Porteros Automaticos</li></ul></section><section class="serv" id="electricidad"><div class="serv-cab"><img src="/img/cache_7650570.png" alt="" width="180" height="200" loading="lazy"><div><h2>Electricidad</h2><p class="cuantos">12 servicios</p></div></div><ul class="lista"><li>Electricista de Urgencia</li><li>Cambios de Potencia</li><li>Boletines/Dictamentes Electricos</li><li>Cambiar Enchufes/Interruptores</li><li>Revision de la Instalacion</li><li>Instalar Apliques/Focos/Halogenos</li><li>Sustituir Fusibles</li><li>Apagones Electricos</li><li>Abrir Puntos de Luz</li><li>Cambiar Magnetotermico</li><li>Cambiar el Diferencial</li><li>Reparar o sustituir el Timbre</li></ul></section><section class="serv" id="cerrajeria"><div class="serv-cab"><img src="/img/cache_7650600.png" alt="" width="180" height="200" loading="lazy"><div><h2>Cerrajería</h2><p class="cuantos">11 servicios</p></div></div><ul class="lista"><li>Cerrajeria de Urgencia</li><li>Apertura de Puertas</li><li>Persianas y Cierres Metalicos</li><li>Apertura de Cajas Fuertes</li><li>Apertura de Coches</li><li>Cambiar Cerradura</li><li>Instalar Cerradura</li><li>Sistema de Seguridad</li><li>Cerrajeria Oficinas</li><li>Cerrajeria Comercios</li><li>Cerrajeria Domicilios</li></ul></section><section class="serv" id="pergolas"><div class="serv-cab"><img src="/img/cache_7650611.png" alt="" width="180" height="200" loading="lazy"><div><h2>Pérgolas y toldos</h2><p class="cuantos">4 servicios</p></div></div><ul class="lista"><li>Instalacion de Pergolas</li><li>Reparacion de Pergolas</li><li>Montaje Toldo para Pergola</li><li>Reparacion Toldo Pergola</li></ul></section><section class="serv" id="pintura"><div class="serv-cab"><img src="/img/cache_7650615.png" alt="" width="180" height="200" loading="lazy"><div><h2>Pintura</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Pintar un Domicilio</li><li>Pintar una Oficina</li><li>Quitar Gotele</li><li>Pintar por Estancias</li><li>Pintar Techo</li><li>Pintar con Estuco</li><li>Pequeños Arreglo de Pintura</li></ul></section><section class="serv" id="carpinteria"><div class="serv-cab"><img src="/img/cache_7650618.png" alt="" width="180" height="200" loading="lazy"><div><h2>Carpintería y puertas</h2><p class="cuantos">12 servicios</p></div></div><ul class="lista"><li>Reparacion de Puertas</li><li>Reparacion Muebles de Cocina</li><li>Reparacion de Armarios</li><li>Reparacion de Sillas</li><li>Reparacion de Mesas</li><li>Barnizado y Lacado de Puertas</li><li>Armarios a Medida</li><li>Porches de Madera</li><li>Carpinteria Metalica</li><li>Puertas Blindadas</li><li>Puertas Acorazadas</li><li>Puertas de Seguridad</li></ul></section><section class="serv" id="cristaleria"><div class="serv-cab"><img src="/img/cache_7650628.png" alt="" width="180" height="200" loading="lazy"><div><h2>Cristalería</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Rotura de Cristales</li><li>Reparacion Ventana de una casa</li><li>Mampara de Cristal</li><li>Instalacion de Cristales</li><li>Vidrios Climalit</li><li>Mamparas de Baño</li><li>Cristales Blindados y de Seguridad</li></ul></section><section class="serv" id="reformas"><div class="serv-cab"><img src="/img/cache_7650632.png" alt="" width="180" height="200" loading="lazy"><div><h2>Reformas</h2><p class="cuantos">25 servicios</p></div></div><ul class="lista"><li>Reformar la Cocina</li><li>Reformar el Baño</li><li>Reformar la Vivienda</li><li>Pintar la Casa</li><li>Alicatados</li><li>Impermeabilizacion del Tejado</li><li>Roturas en el Hogar</li><li>Pladur</li><li>Tejados y Cubiertas</li><li>Chapados y Suelos</li><li>Decoracion</li><li>Jardines</li><li>Fachadas</li><li>Canalones</li><li>Impermeabilizacion</li><li>Goteras</li><li>Bajantes</li><li>Humedades</li><li>Filtraciones</li><li>Sellados</li><li>Chimemenas</li><li>Rehabilitaciones</li><li>Plato de Ducha</li><li>Reforma Local</li><li>Reforma Vivienda</li></ul></section><section class="serv" id="reformas-obra"><div class="serv-cab"><img src="/img/cache_7650657.png" alt="" width="180" height="200" loading="lazy"><div><h2>Reformas integrales</h2><p class="cuantos">11 servicios</p></div></div><ul class="lista"><li>Reformas en el Hogar</li><li>Reformas en Oficinas</li><li>Reformas Naves Industriales</li><li>Reformar Cuarto de Baño</li><li>Reformar Cocina</li><li>Reformar Habitaciones</li><li>Reformar Salon</li><li>Reformar Jardin</li><li>Reforma Integral</li><li>Reforma Casa</li><li>Reforma Vivienda</li></ul></section><section class="serv" id="electrodomesticos"><div class="serv-cab"><img src="/img/cache_7650679.png" alt="" width="180" height="200" loading="lazy"><div><h2>Electrodomésticos</h2><p class="cuantos">13 servicios</p></div></div><ul class="lista"><li>Gama Blanca</li><li>Gama Marron</li><li>Reparacion de Lavadoras</li><li>Reparacion de Frigorificos</li><li>Reparacion Lavavajillas</li><li>Reparacion Vitroceramica</li><li>Reparacion Cocina</li><li>Reparacion Congelador</li><li>Reparacion Nevera</li><li>Reparacion Horno</li><li>Reparacion Secadora</li><li>Reparacion Caldera</li><li>Reparacion Chimeneas</li></ul></section><section class="serv" id="aire"><div class="serv-cab"><img src="/img/cache_7650682.png" alt="" width="180" height="200" loading="lazy"><div><h2>Aire acondicionado</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Montaje Aire Acondicionado en el Hogar</li><li>Montaje de Aire Acondicionado en Oficinas</li><li>Reparacion de Aire Acondicionado</li><li>Carga de Gas</li><li>Limpieza de Filtros</li><li>Instalaciones Aire Acondicionado</li><li>Servicio de Mantenimiento</li></ul></section><section class="serv" id="persianas"><div class="serv-cab"><img src="/img/cache_7650705.png" alt="" width="180" height="200" loading="lazy"><div><h2>Persianas y mosquiteras</h2><p class="cuantos">13 servicios</p></div></div><ul class="lista"><li>Instalacion de Persianas</li><li>Reparacion de Persianas</li><li>Persianas de Seguridad</li><li>Mosquiteras</li><li>Motorizacion de Persianas</li><li>Persianas de Aluminio</li><li>Persianas de PVC</li><li>Persianas de Madera</li><li>Persianas caidas</li><li>Rotura de Lamas</li><li>Cambio de Cuerdas</li><li>Venecianas</li><li>Estores</li></ul></section><section class="serv" id="urgencias"><h2>Servicios de urgencia</h2><div class="vacio">Pendiente de rellenar: horarios de urgencias, zonas cubiertas y tiempo de respuesta.</div></section></div><footer class="pie"><div class="env">
+<div class="env"><div class="indice" id="servicios"><h2>Todas las especialidades</h2><ul class="rejilla"><li><a href="#fontaneria"><img src="/img/cache_7650510.png" alt="" width="180" height="200" loading="lazy"><span><b>Fontanería</b><em>21 servicios</em></span></a></li><li><a href="#television"><img src="/img/cache_7650514.png" alt="" width="180" height="200" loading="lazy"><span><b>Televisión, vídeo y proyectores</b><em>40 servicios</em></span></a></li><li><a href="#tejados"><img src="/img/cache_7650518.png" alt="" width="180" height="200" loading="lazy"><span><b>Tejados y canalones</b><em>10 servicios</em></span></a></li><li><a href="#antenas"><img src="/img/cache_7650521.png" alt="" width="180" height="200" loading="lazy"><span><b>Antenas y TDT</b><em>8 servicios</em></span></a></li><li><a href="#audio"><img src="/img/cache_7650526.png" alt="" width="180" height="200" loading="lazy"><span><b>Audio, vídeo y porteros</b><em>8 servicios</em></span></a></li><li><a href="#electricidad"><img src="/img/cache_7650570.png" alt="" width="180" height="200" loading="lazy"><span><b>Electricidad</b><em>12 servicios</em></span></a></li><li><a href="#cerrajeria"><img src="/img/cache_7650600.png" alt="" width="180" height="200" loading="lazy"><span><b>Cerrajería</b><em>11 servicios</em></span></a></li><li><a href="#pergolas"><img src="/img/cache_7650611.png" alt="" width="180" height="200" loading="lazy"><span><b>Pérgolas y toldos</b><em>4 servicios</em></span></a></li><li><a href="#pintura"><img src="/img/cache_7650615.png" alt="" width="180" height="200" loading="lazy"><span><b>Pintura</b><em>7 servicios</em></span></a></li><li><a href="#carpinteria"><img src="/img/cache_7650618.png" alt="" width="180" height="200" loading="lazy"><span><b>Carpintería y puertas</b><em>12 servicios</em></span></a></li><li><a href="#cristaleria"><img src="/img/cache_7650628.png" alt="" width="180" height="200" loading="lazy"><span><b>Cristalería</b><em>7 servicios</em></span></a></li><li><a href="#reformas"><img src="/img/cache_7650632.png" alt="" width="180" height="200" loading="lazy"><span><b>Reformas</b><em>25 servicios</em></span></a></li><li><a href="#reformas-obra"><img src="/img/cache_7650657.png" alt="" width="180" height="200" loading="lazy"><span><b>Reformas integrales</b><em>11 servicios</em></span></a></li><li><a href="#electrodomesticos"><img src="/img/cache_7650679.png" alt="" width="180" height="200" loading="lazy"><span><b>Electrodomésticos</b><em>13 servicios</em></span></a></li><li><a href="#aire"><img src="/img/cache_7650682.png" alt="" width="180" height="200" loading="lazy"><span><b>Aire acondicionado</b><em>7 servicios</em></span></a></li><li><a href="#persianas"><img src="/img/cache_7650705.png" alt="" width="180" height="200" loading="lazy"><span><b>Persianas y mosquiteras</b><em>13 servicios</em></span></a></li></ul></div><section class="serv" id="fontaneria"><div class="serv-cab"><img src="/img/cache_7650510.png" alt="" width="180" height="200" loading="lazy"><div><h2>Fontanería</h2><p class="cuantos">21 servicios</p></div></div><ul class="lista"><li>Reparaciones Fontaneria Fontaneros Urgentes</li><li>Rotura de Tuberias</li><li>Fuga de Agua</li><li>Desatascar Tuberias</li><li>Reparar Cisterna</li><li>Cambiar un Grifo</li><li>Cambiar Plato de Ducha</li><li>Eliminar Humedades</li><li>Eliminar Filtraciones</li><li>Desatascar Fregadero</li><li>Instalar Fregadero</li><li>Cambiar Valvula</li><li>Cambiar Llave de Paso</li><li>Sustituir o cambiar Sifones</li><li>Reparar Manpara de Baño</li><li>Sellar Cuarto de Baño</li><li>Problemas de Fontaneria</li><li>Desatrancar Tuberia</li><li>Tuberias Rotas</li><li>Tuberias con Fugas</li><li>Instalacion de Electrodomesticos</li></ul></section><section class="serv" id="television"><div class="serv-cab"><img src="/img/cache_7650514.png" alt="" width="180" height="200" loading="lazy"><div><h2>Televisión, vídeo y proyectores</h2><p class="cuantos">40 servicios</p></div></div><ul class="lista"><li>Reparacion de Television de Plasma</li><li>Reparacion de Television LCD</li><li>Reparacion Television OLED</li><li>Reparacion Television de Tubo</li><li>Reparacion Proyector</li><li>Airis</li><li>Aiwa</li><li>Akai</li><li>Bang &amp; Olufsen</li><li>Belson</li><li>Benq</li><li>Blaupunkt</li><li>Daewoo</li><li>Denon</li><li>Fujitsu</li><li>Goldstar</li><li>Grundig</li><li>Harman Kardon</li><li>Hisense</li><li>Hitachi</li><li>Infocus</li><li>JVC</li><li>Kenwood</li><li>LG</li><li>Loewe</li><li>Pioneer</li><li>Marantz</li><li>Nec</li><li>Saba</li><li>Saivod</li><li>Samsung</li><li>Sanyo</li><li>Sharp</li><li>Siemens</li><li>SONY</li><li>Technics</li><li>Telefunken</li><li>Thomson</li><li>Toshiba</li><li>Vieta</li></ul></section><section class="serv" id="tejados"><div class="serv-cab"><img src="/img/cache_7650518.png" alt="" width="180" height="200" loading="lazy"><div><h2>Tejados y canalones</h2><p class="cuantos">10 servicios</p></div></div><ul class="lista"><li>Rehabilitacion de Tejados</li><li>Inspeccion de Tejados</li><li>Reparacion de daños en el Tejado</li><li>Reparacion de Goteras</li><li>Filtraciones en Tejados</li><li>Sustituir Canalones</li><li>Montaje Canalones</li><li>Mantenimiento de Tejados</li><li>Montaje Sistemas Termicos</li><li>Tejados Antiguos</li></ul></section><section class="serv" id="antenas"><div class="serv-cab"><img src="/img/cache_7650521.png" alt="" width="180" height="200" loading="lazy"><div><h2>Antenas y TDT</h2><p class="cuantos">8 servicios</p></div></div><ul class="lista"><li>Antenas de TV</li><li>Sintonizacion de Canales</li><li>Reordenacion de Canales</li><li>Calidad de la Señal</li><li>TDT</li><li>Parabolicas</li><li>Antenas de TV en comunidades</li><li>Receptores TDT</li></ul></section><section class="serv" id="audio"><div class="serv-cab"><img src="/img/cache_7650526.png" alt="" width="180" height="200" loading="lazy"><div><h2>Audio, vídeo y porteros</h2><p class="cuantos">8 servicios</p></div></div><ul class="lista"><li>Aparatos de Audio</li><li>Aparatos de Video</li><li>Equipos de Musica</li><li>Home Cinema</li><li>Videojuegos</li><li>Camara de Fotos</li><li>Camara de Video</li><li>Porteros Automaticos</li></ul></section><section class="serv" id="electricidad"><div class="serv-cab"><img src="/img/cache_7650570.png" alt="" width="180" height="200" loading="lazy"><div><h2>Electricidad</h2><p class="cuantos">12 servicios</p></div></div><ul class="lista"><li>Electricista de Urgencia</li><li>Cambios de Potencia</li><li>Boletines/Dictamentes Electricos</li><li>Cambiar Enchufes/Interruptores</li><li>Revision de la Instalacion</li><li>Instalar Apliques/Focos/Halogenos</li><li>Sustituir Fusibles</li><li>Apagones Electricos</li><li>Abrir Puntos de Luz</li><li>Cambiar Magnetotermico</li><li>Cambiar el Diferencial</li><li>Reparar o sustituir el Timbre</li></ul></section><section class="serv" id="cerrajeria"><div class="serv-cab"><img src="/img/cache_7650600.png" alt="" width="180" height="200" loading="lazy"><div><h2>Cerrajería</h2><p class="cuantos">11 servicios</p></div></div><ul class="lista"><li>Cerrajeria de Urgencia</li><li>Apertura de Puertas</li><li>Persianas y Cierres Metalicos</li><li>Apertura de Cajas Fuertes</li><li>Apertura de Coches</li><li>Cambiar Cerradura</li><li>Instalar Cerradura</li><li>Sistema de Seguridad</li><li>Cerrajeria Oficinas</li><li>Cerrajeria Comercios</li><li>Cerrajeria Domicilios</li></ul></section><section class="serv" id="pergolas"><div class="serv-cab"><img src="/img/cache_7650611.png" alt="" width="180" height="200" loading="lazy"><div><h2>Pérgolas y toldos</h2><p class="cuantos">4 servicios</p></div></div><ul class="lista"><li>Instalacion de Pergolas</li><li>Reparacion de Pergolas</li><li>Montaje Toldo para Pergola</li><li>Reparacion Toldo Pergola</li></ul></section><section class="serv" id="pintura"><div class="serv-cab"><img src="/img/cache_7650615.png" alt="" width="180" height="200" loading="lazy"><div><h2>Pintura</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Pintar un Domicilio</li><li>Pintar una Oficina</li><li>Quitar Gotele</li><li>Pintar por Estancias</li><li>Pintar Techo</li><li>Pintar con Estuco</li><li>Pequeños Arreglo de Pintura</li></ul></section><section class="serv" id="carpinteria"><div class="serv-cab"><img src="/img/cache_7650618.png" alt="" width="180" height="200" loading="lazy"><div><h2>Carpintería y puertas</h2><p class="cuantos">12 servicios</p></div></div><ul class="lista"><li>Reparacion de Puertas</li><li>Reparacion Muebles de Cocina</li><li>Reparacion de Armarios</li><li>Reparacion de Sillas</li><li>Reparacion de Mesas</li><li>Barnizado y Lacado de Puertas</li><li>Armarios a Medida</li><li>Porches de Madera</li><li>Carpinteria Metalica</li><li>Puertas Blindadas</li><li>Puertas Acorazadas</li><li>Puertas de Seguridad</li></ul></section><section class="serv" id="cristaleria"><div class="serv-cab"><img src="/img/cache_7650628.png" alt="" width="180" height="200" loading="lazy"><div><h2>Cristalería</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Rotura de Cristales</li><li>Reparacion Ventana de una casa</li><li>Mampara de Cristal</li><li>Instalacion de Cristales</li><li>Vidrios Climalit</li><li>Mamparas de Baño</li><li>Cristales Blindados y de Seguridad</li></ul></section><section class="serv" id="reformas"><div class="serv-cab"><img src="/img/cache_7650632.png" alt="" width="180" height="200" loading="lazy"><div><h2>Reformas</h2><p class="cuantos">25 servicios</p></div></div><ul class="lista"><li>Reformar la Cocina</li><li>Reformar el Baño</li><li>Reformar la Vivienda</li><li>Pintar la Casa</li><li>Alicatados</li><li>Impermeabilizacion del Tejado</li><li>Roturas en el Hogar</li><li>Pladur</li><li>Tejados y Cubiertas</li><li>Chapados y Suelos</li><li>Decoracion</li><li>Jardines</li><li>Fachadas</li><li>Canalones</li><li>Impermeabilizacion</li><li>Goteras</li><li>Bajantes</li><li>Humedades</li><li>Filtraciones</li><li>Sellados</li><li>Chimemenas</li><li>Rehabilitaciones</li><li>Plato de Ducha</li><li>Reforma Local</li><li>Reforma Vivienda</li></ul></section><section class="serv" id="reformas-obra"><div class="serv-cab"><img src="/img/cache_7650657.png" alt="" width="180" height="200" loading="lazy"><div><h2>Reformas integrales</h2><p class="cuantos">11 servicios</p></div></div><ul class="lista"><li>Reformas en el Hogar</li><li>Reformas en Oficinas</li><li>Reformas Naves Industriales</li><li>Reformar Cuarto de Baño</li><li>Reformar Cocina</li><li>Reformar Habitaciones</li><li>Reformar Salon</li><li>Reformar Jardin</li><li>Reforma Integral</li><li>Reforma Casa</li><li>Reforma Vivienda</li></ul></section><section class="serv" id="electrodomesticos"><div class="serv-cab"><img src="/img/cache_7650679.png" alt="" width="180" height="200" loading="lazy"><div><h2>Electrodomésticos</h2><p class="cuantos">13 servicios</p></div></div><ul class="lista"><li>Gama Blanca</li><li>Gama Marron</li><li>Reparacion de Lavadoras</li><li>Reparacion de Frigorificos</li><li>Reparacion Lavavajillas</li><li>Reparacion Vitroceramica</li><li>Reparacion Cocina</li><li>Reparacion Congelador</li><li>Reparacion Nevera</li><li>Reparacion Horno</li><li>Reparacion Secadora</li><li>Reparacion Caldera</li><li>Reparacion Chimeneas</li></ul></section><section class="serv" id="aire"><div class="serv-cab"><img src="/img/cache_7650682.png" alt="" width="180" height="200" loading="lazy"><div><h2>Aire acondicionado</h2><p class="cuantos">7 servicios</p></div></div><ul class="lista"><li>Montaje Aire Acondicionado en el Hogar</li><li>Montaje de Aire Acondicionado en Oficinas</li><li>Reparacion de Aire Acondicionado</li><li>Carga de Gas</li><li>Limpieza de Filtros</li><li>Instalaciones Aire Acondicionado</li><li>Servicio de Mantenimiento</li></ul></section><section class="serv" id="persianas"><div class="serv-cab"><img src="/img/cache_7650705.png" alt="" width="180" height="200" loading="lazy"><div><h2>Persianas y mosquiteras</h2><p class="cuantos">13 servicios</p></div></div><ul class="lista"><li>Instalacion de Persianas</li><li>Reparacion de Persianas</li><li>Persianas de Seguridad</li><li>Mosquiteras</li><li>Motorizacion de Persianas</li><li>Persianas de Aluminio</li><li>Persianas de PVC</li><li>Persianas de Madera</li><li>Persianas caidas</li><li>Rotura de Lamas</li><li>Cambio de Cuerdas</li><li>Venecianas</li><li>Estores</li></ul></section><section class="serv" id="urgencias"><h2>Servicios de urgencia</h2><div class="vacio">Pendiente de rellenar: horarios de urgencias, zonas cubiertas y tiempo de respuesta.</div></section></div><footer class="pie"><div class="env">
   <nav aria-label="Legal">
     <a href="/aviso-legal/">Aviso legal</a>
     <a href="/privacidad/">Protección de datos</a>
