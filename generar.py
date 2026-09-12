@@ -28,6 +28,8 @@ import os
 import re
 from datetime import date
 
+import legales as legales_txt
+
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DOMINIO = "https://www.reparaciones.net"
 HOY = date.today().isoformat()
@@ -55,9 +57,21 @@ SECCIONES = [
     ("persianas",       "Persianas y mosquiteras",      16),
 ]
 
-DESCRIPCION = ("Reparaciones del hogar en la Comunidad de Madrid: fontanería, "
-               "electricidad, cerrajería, electrodomésticos, persianas, tejados, "
-               "pintura, carpintería, cristalería y reformas.")
+# Las 20 ilustraciones de 180x200 de la web vieja, en su orden de aparicion
+# (la primera imagen era el logo). Que la n-esima corresponda a la n-esima
+# seccion es una DEDUCCION del orden del HTML, no un dato: si alguna queda
+# donde no toca, se reordena aqui y se vuelve a generar.
+ILUSTRACIONES = ["cache_7650510.png", "cache_7650514.png", "cache_7650518.png",
+                 "cache_7650521.png", "cache_7650526.png", "cache_7650570.png",
+                 "cache_7650600.png", "cache_7650611.png", "cache_7650615.png",
+                 "cache_7650618.png", "cache_7650628.png", "cache_7650632.png",
+                 "cache_7650657.png", "cache_7650679.png", "cache_7650682.png",
+                 "cache_7650705.png"]
+
+DESCRIPCION = ("Ponemos en contacto a particulares de la Comunidad de Madrid con "
+               "profesionales de fontaneria, electricidad, cerrajeria, "
+               "electrodomesticos, persianas, tejados, pintura, carpinteria, "
+               "cristaleria y reformas.")
 
 
 def listas():
@@ -136,6 +150,20 @@ footer.pie nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px}
 #galletas p{margin:0;font-size:14.5px;max-width:62ch}
 #galletas button{background:var(--azul);color:#fff;border:0;border-radius:6px;
   padding:9px 18px;font-size:14.5px;cursor:pointer}
+.logo-hero{display:block;margin:0 0 18px;height:auto;max-width:230px}
+.aclara{font-size:15px;color:var(--tenue);border-left:3px solid var(--naranja);
+  padding-left:13px;max-width:58ch}
+.serv-cab{display:flex;gap:16px;align-items:center;margin:0 0 14px}
+.serv-cab img{border-radius:8px;border:1px solid var(--linea);flex:0 0 auto;
+  width:72px;height:80px;object-fit:cover;background:var(--sup2)}
+.serv-cab h2{margin:0}
+.serv-cab .cuantos{margin:2px 0 0}
+.legal{max-width:72ch;padding:34px 0 10px}
+.legal h1{font-size:clamp(25px,4vw,34px);letter-spacing:-.02em;margin:0 0 20px}
+.legal h2{font-size:19px;margin:30px 0 8px;letter-spacing:-.01em}
+.legal p,.legal li{color:var(--suave)}
+.legal code{background:var(--sup2);padding:1px 5px;border-radius:3px;font-size:.9em}
+.legal .nota{font-size:14px;color:var(--tenue);border-left:2px solid var(--linea);padding-left:12px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 """
 
@@ -240,9 +268,14 @@ def portada(datos):
                 DESCRIPCION, "/", json_ld(secs)), CABECERA_HTML]
     total = sum(len(datos[i]) for _, _, i in secs)
     h.append("""<div class="hero"><div class="env">
-  <h1>Reparaciones del hogar en la Comunidad de Madrid</h1>
-  <p>Fontanería, electricidad, cerrajería, electrodomésticos, persianas, tejados,
-     pintura, carpintería, cristalería y reformas. %d servicios en %d especialidades.</p>
+  <img class="logo-hero" src="/img/logo.png" alt="Reparaciones.net" width="302" height="117">
+  <h1>Profesionales de reparaciones en la Comunidad de Madrid</h1>
+  <p>Te ponemos en contacto con el profesional que necesitas: fontaneros,
+     electricistas, cerrajeros, técnicos de electrodomésticos, pintores,
+     carpinteros y más. <strong>%d servicios</strong> en %d especialidades.</p>
+  <p class="aclara">Reparaciones.net no hace los trabajos: conecta a quien los
+     necesita con quien los hace. El presupuesto y la garantía los acuerdas
+     directamente con el profesional.</p>
   <p class="pendiente">Los datos de contacto están pendientes de rellenar.</p>
 </div></div>
 """ % (total, len(secs)))
@@ -253,11 +286,15 @@ def portada(datos):
         h.append('<li><a href="#%s">%s</a></li>' % (a, esc(t)))
     h.append("</ul></div>")
 
-    for a, t, i in secs:
+    for n, (a, t, i) in enumerate(secs):
         items = datos[i]
-        h.append('<section class="serv" id="%s"><h2>%s</h2>'
-                 '<p class="cuantos">%d servicios</p><ul class="lista">'
-                 % (a, esc(t), len(items)))
+        ilus = ILUSTRACIONES[n] if n < len(ILUSTRACIONES) else None
+        h.append('<section class="serv" id="%s"><div class="serv-cab">%s<div>'
+                 '<h2>%s</h2><p class="cuantos">%d servicios</p></div></div>'
+                 '<ul class="lista">'
+                 % (a,
+                    ('<img src="/img/%s" alt="" width="180" height="200" loading="lazy">' % ilus) if ilus else '',
+                    esc(t), len(items)))
         for x in items:
             h.append("<li>%s</li>" % esc(x))
         h.append("</ul></section>")
@@ -270,13 +307,10 @@ def portada(datos):
     return "".join(h)
 
 
-def pagina_vacia(titulo, ruta, aviso):
+def pagina_legal(titulo, ruta, cuerpo):
     h = [cabeza(titulo + " | Reparaciones.net", titulo, ruta), CABECERA_HTML]
-    h.append('<div class="env"><div class="hero" style="background:none;border:0;padding:40px 0 10px">'
-             '<h1>%s</h1></div>' % esc(titulo))
-    h.append('<div class="vacio"><strong>Esta página está vacía a propósito.</strong><br>%s</div>'
-             % esc(aviso))
-    h.append("</div>")
+    h.append('<div class="env"><div class="legal"><h1>%s</h1>%s</div></div>'
+             % (esc(titulo), cuerpo))
     h.append(PIE_HTML)
     return "".join(h)
 
@@ -293,17 +327,13 @@ def main():
     hechos = [escribe("index.html", portada(datos))]
 
     legales = [
-        ("aviso-legal", "Aviso legal",
-         "Faltan la razón social, el NIF, el domicilio y los datos de registro."),
-        ("privacidad", "Política de protección de datos",
-         "Faltan el responsable del tratamiento, la finalidad, la base jurídica y cómo ejercer los derechos."),
-        ("cookies", "Política de cookies",
-         "Hoy la web no usa cookies de seguimiento. Si algún día se añade analítica o publicidad, hay que detallarlas aquí Y pedir consentimiento antes de cargarlas."),
-        ("contacto", "Contacto",
-         "Faltan el teléfono, el correo y la dirección. No se ha puesto ningún formulario todavía."),
+        ("aviso-legal", "Aviso legal", legales_txt.AVISO_LEGAL),
+        ("privacidad", "Política de protección de datos", legales_txt.PRIVACIDAD),
+        ("cookies", "Política de cookies", legales_txt.COOKIES),
+        ("contacto", "Contacto", legales_txt.CONTACTO),
     ]
-    for slug, titulo, aviso in legales:
-        hechos.append(escribe(slug + "/index.html", pagina_vacia(titulo, "/" + slug + "/", aviso)))
+    for slug, titulo, cuerpo in legales:
+        hechos.append(escribe(slug + "/index.html", pagina_legal(titulo, "/" + slug + "/", cuerpo)))
 
     rutas = ["/"] + ["/" + s + "/" for s, _, _ in legales]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
