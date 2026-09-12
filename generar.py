@@ -349,8 +349,15 @@ def main():
     # Para los buscadores con IA: que sepan que es esto sin tener que adivinarlo.
     hechos.append(escribe("llms.txt",
         "# Reparaciones.net\n\n"
-        "> Reparaciones y mantenimiento del hogar en la Comunidad de Madrid.\n\n"
-        "Servicios: fontaneria, electricidad, cerrajeria, electrodomesticos, "
+        "> Servicio de INTERMEDIACION: pone en contacto a particulares de la "
+        "Comunidad de Madrid con profesionales independientes de reparaciones.
+
+"
+        "NO ejecuta los trabajos: los hace el profesional, y el contrato de la "
+        "reparacion es entre el usuario y ese profesional.
+
+"
+        "Oficios que se intermedian: fontaneria, electricidad, cerrajeria, electrodomesticos, "
         "television y audio, antenas y TDT, persianas y mosquiteras, tejados y "
         "canalones, pintura, carpinteria, cristaleria, pergolas y toldos, aire "
         "acondicionado y reformas.\n\n"
