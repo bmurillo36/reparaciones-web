@@ -15,8 +15,9 @@ QUE SE MANTIENE Y QUE NO, y esto lo pidio Pedro expresamente:
                legales. Quedan las paginas creadas y enlazadas, pero SIN
                contenido: hay que rellenarlas antes de publicar de verdad.
 
-El telefono de la web vieja era 691.10.10.10 y esta APUNTADO AQUI a proposito,
-para que no se pierda el dato, pero NO se escribe en la web.
+El telefono de la web vieja NO se escribe aqui: este repositorio es PUBLICO y
+seria publicar un numero de telefono. Esta guardado en la memoria de Claude,
+en la ficha web-reparaciones, y en la copia de _original (fuera de git).
 
 POR QUE ESTATICO. La web vieja costaba 25 EUR/mes por un editor que nadie
 usaba. Esto son ficheros sueltos: se sirven desde el VPS o desde GitHub Pages
@@ -33,9 +34,6 @@ import legales as legales_txt
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DOMINIO = "https://www.reparaciones.net"
 HOY = date.today().isoformat()
-
-# El telefono viejo, guardado por si hace falta. NO se usa en la web.
-TELEFONO_ANTIGUO = "691.10.10.10"
 
 # (ancla, titulo de la seccion, indice de la lista en contenido.txt)
 SECCIONES = [
@@ -291,8 +289,7 @@ def main():
     print("Secciones:", len([s for s in SECCIONES if s[2] < len(datos)]),
           "| servicios:", sum(len(datos[i]) for _, _, i in SECCIONES if i < len(datos)))
     print("EN BLANCO a proposito: telefono, correo, direccion, datos de empresa")
-    print("y los tres textos legales. El telefono de la web vieja era",
-          TELEFONO_ANTIGUO, "(apuntado aqui, NO publicado).")
+    print("y los tres textos legales.")
 
 
 if __name__ == "__main__":
